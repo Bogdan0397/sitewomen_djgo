@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content%}
+<h1>Авторизация</h1>
+<form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}"/>
+    <div class = 'form-error'>{{ form.non_field_errors }}</div>
+    {% for f in form%}
+  <p><label class="form-label">{{f.label}}</label>{{f}}</p>
+    <div class = 'form-error'>{{f.errors}}</div>
+  {% endfor %}
+    <div>
+    <button class="button" type="submit" data-width="60">Войти</button>
+    <a style="float:right" href="{% url 'users:password_reset' %}">Забыли пароль?</a>
+    </div>
+
+</form>
+
+<hr>
+<a href="{% url 'social:begin' 'github' %}"><img src="/media/social_auth/github.png" width="60"></a>
+<a href="{% url 'social:begin' 'facebook' %}"><img src="/media/social_auth/facebook.png" width="60"></a>
+
+{% endblock%}

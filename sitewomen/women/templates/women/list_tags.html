@@ -1,0 +1,10 @@
+{% load women_tags %}
+
+{% if tags %}
+    <p>Теги:</p>
+    <ul class="tags-list">
+        {% for t in tags %}
+        <li><a href="{% get_absolute_url_for_api_tag t.slug %}">{{t.tag}}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}

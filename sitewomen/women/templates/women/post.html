@@ -1,0 +1,34 @@
+{%extends 'base.html' %}
+{% load women_tags %}
+{% block breadcrumbs %}
+
+{% if perms.women.change_women %}
+<p><a href="{% url 'update' post.slug %}">Редактировать</a></p>
+{%endif%}
+
+
+{% if post.tagpost %}
+
+<ul class="tags-list">
+    <li>Теги:</li>
+    {% for t in post.tagpost %}
+    <li><a href="{% get_absolute_url_for_api_tag t.slug %}">{{t.tag}}</a></li>
+    {% endfor %}
+
+</ul>
+
+{%endif%}
+
+{%endblock%}
+
+
+
+{% block content %}
+<h1>{{post.title}}</h1>
+
+{% if post.photo %}
+<p ><img class="img-article-left" src="{{post.photo}}"></p>
+{% endif %}
+{{post.content|linebreaks}}
+
+{% endblock %}

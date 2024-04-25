@@ -39,8 +39,8 @@ def date_convert(post_id):
         index = int(post_id)-11
     return {'post':res[int(post_id)-1]}
 
-#absolute_urls
 
+#absolute_urls
 @register.simple_tag
 def get_absolute_url_for_api_post(api_post):
     return reverse('post', kwargs={'post_slug': api_post['slug']})

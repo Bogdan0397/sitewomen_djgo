@@ -30,7 +30,7 @@ class LoginUser(FormView):
 
 
         def form_valid(self, form):
-            api_url = 'http://www.mkdjgo.site/api/v1/token/'
+            api_url = 'http://127.0.0.1:8001/api/v1/token/'
             c_data = form.cleaned_data
             response = requests.post(api_url, data=c_data)
 
@@ -39,7 +39,7 @@ class LoginUser(FormView):
                 token = response.json().get('access')  # Предположим, что токен возвращается в формате JSON
 
                 # Залогиниваем пользователя в Django
-                response_token = requests.post('http://www.mkdjgo.site/api/v1/token/verify/',data={'token':token})
+                response_token = requests.post('http://127.0.0.1:8001//api/v1/token/verify/',data={'token':token})
                 if response_token.json() == {}:
 
                     user = User.objects.create(username=c_data.get('username'))
@@ -89,7 +89,7 @@ class RegisterUser(FormView):
 
     def form_valid(self, form):
         c_data = form.cleaned_data
-        api_url = 'http://www.mkdjgo.site/api/v1/users/'
+        api_url = 'http://127.0.0.1:8001//api/v1/users/'
         c_data.pop('password2', None)
         response = requests.post(api_url, data=c_data)
 
@@ -131,9 +131,9 @@ class ProfileUser(View):
                 return i['id']
         raise ValueError('User not found')
     def get(self,request):
-        users = requests.get('http://www.mkdjgo.site/api/v1/users/')
+        users = requests.get('http://127.0.0.1:8001/api/v1/users/')
         pk = self.get_user_pk(users, self.request.user)
-        response = requests.get(f'http://www.mkdjgo.site/api/v1/user/{pk}/')
+        response = requests.get(f'http://127.0.0.1:8001/api/v1/user/{pk}/')
         data = response.json()
 
         photo_url = data.get('photo')
@@ -150,13 +150,13 @@ class ProfileUser(View):
         return render(request, self.template_name,{'form':form,'object':data,'title':"Профиль пользователя",'default_img':settings.DEFAULT_USER_IMAGE})
 
     def patch(self,request):
-        users = requests.get('http://www.mkdjgo.site/api/v1/users/')
+        users = requests.get('http://127.0.0.1:8001/api/v1/users/')
 
         pk = self.get_user_pk(users,self.request.user)
         form = ProfileUserForm(request.POST)
         print(form.data)
         if form.is_valid():
-            api_url = f'http://www.mkdjgo.site/api/v1/user/{pk}/'
+            api_url = f'http://127.0.0.1:8001/api/v1/user/{pk}/'
             updated_data = form.cleaned_data
             photo_file = self.request.FILES.get('photo')
             data = {**updated_data}
@@ -183,7 +183,7 @@ class ProfileUser(View):
     # def post(self,request):
     # def form_valid(self, form):
     #     c_data = form.cleaned_data
-    #     api_url = 'http://www.mkdjgo.site/api/v1/user/'
+    #     api_url = 'http://127.0.0.1:8001/api/v1/user/'
     #     c_data.pop('password2', None)
     #     response = requests.post(api_url, data=c_data)
     #
@@ -213,10 +213,10 @@ class UserPasswordChange(PasswordChangeView):
 
     def form_valid(self, form):
         # Вызываем сначала метод из родительского класса, чтобы изменить пароль в базе данных Django
-        users = requests.get('http://www.mkdjgo.site/api/v1/users/')
+        users = requests.get('http://127.0.0.1:8001/api/v1/users/')
         pk = self.get_user_pk(users, self.request.user)
 
-        api_url = f'http://www.mkdjgo.site/api/v1/user/{pk}/'
+        api_url = f'http://127.0.0.1:8001/api/v1/user/{pk}/'
 
         # Получаем новый пароль из формы
         new_password = form.cleaned_data['new_password1']
@@ -245,7 +245,7 @@ class UserResetView(PasswordResetView):
 
         # Получаем новый пароль из форм
         # Отправляем запрос к вашему API для получения информации о пользователе по email
-        api_url = f'http://www.mkdjgo.site/api/v1/username/{email_form}/'
+        api_url = f'http://127.0.0.1:8001/api/v1/username/{email_form}/'
         api_response = requests.get(api_url)
         UserResetView.response_data = api_response.json()
 
@@ -286,7 +286,7 @@ class UserPasswordResetConfirm(FormView):
 
         # Получаем новый пароль из форм
         # Отправляем запрос к вашему API для получения информации о пользователе по email
-        api_url = f'http://www.mkdjgo.site/api/v1/user/{UserResetView.response_data["id"]}/'
+        api_url = f'http://127.0.0.1:8001/api/v1/user/{UserResetView.response_data["id"]}/'
         headers = {'Content-type': 'application/json'}
         api_response = requests.put(api_url,json={"password":password_form},headers=headers)
 

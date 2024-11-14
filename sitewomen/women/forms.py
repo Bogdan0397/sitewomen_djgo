@@ -26,10 +26,10 @@ class AddPostForm(forms.Form):
     title = forms.CharField(label='Название',max_length=255,required=True)
     slug = forms.SlugField(label='Слаг',required=True)
     photo = forms.ImageField(label='Фото',required=False)
-    content = forms.CharField(label='Контент',required=True)
     is_published = forms.BooleanField(initial=False,required=False,label='Опубликовано')
     CHOICES1 = [(i['id'],i['name']) for i in get_cats_api()]
     cat = forms.ChoiceField(choices=CHOICES1, label='Категория')
+    content = forms.CharField(label='Контент', required=True)
     CHOICES2 = [(i['id'],i['name']) for i in get_husbands_api()]
     CHOICES2.append((None,None))
     husband = forms.ChoiceField(choices =CHOICES2,  required=False,  label='Муж')

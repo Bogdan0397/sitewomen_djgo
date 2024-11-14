@@ -6,5 +6,5 @@ class AdminURLMiddleware:
 
     def __call__(self, request):
         if request.path.startswith('/admin'):
-            return HttpResponseRedirect('http://www.mkdjgo.site/admin' + request.path[len('/admin'):])
+            return HttpResponseRedirect('http://http://127.0.0.1:8001//admin' + request.path[len('/admin'):])
         return self.get_response(request)

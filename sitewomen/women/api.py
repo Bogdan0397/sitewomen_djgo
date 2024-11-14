@@ -3,7 +3,7 @@ from django.http import Http404
 
 
 def get_womenlist_api():
-    url = 'http://www.mkdjgo.site/api/v1/women/'
+    url = 'http://127.0.0.1:8001/api/v1/women/'
     response = requests.get(url)
 
     if response.status_code == 200:
@@ -14,7 +14,7 @@ def get_womenlist_api():
 
 
 def get_womenpost_api(post_slug):
-    url = f'http://www.mkdjgo.site/api/v1/women/{post_slug}'
+    url = f'http://127.0.0.1:8001/api/v1/women/{post_slug}'
     response = requests.get(url)
 
     if response.status_code == 200:
@@ -25,7 +25,7 @@ def get_womenpost_api(post_slug):
 
 
 def get_womencat_api(cat_slug):
-    url = f'http://www.mkdjgo.site/api/v1/womencatlist/{cat_slug}'
+    url = f'http://127.0.0.1:8001/api/v1/womencatlist/{cat_slug}'
     response = requests.get(url)
 
     if response.status_code == 200:
@@ -36,7 +36,7 @@ def get_womencat_api(cat_slug):
 
 
 def get_womentag_api(tag):
-    url = f'http://www.mkdjgo.site/api/v1/womentaglist/{tag}'
+    url = f'http://127.0.0.1:8001/api/v1/womentaglist/{tag}'
     response = requests.get(url)
 
     if response.status_code == 200:
@@ -46,7 +46,7 @@ def get_womentag_api(tag):
         raise Http404("Tag does not exist")
 
 def get_tags_api():
-    url = f'http://www.mkdjgo.site/api/v1/taglist'
+    url = f'http://127.0.0.1:8001/api/v1/taglist'
     response = requests.get(url)
 
     if response.status_code == 200:
@@ -56,7 +56,7 @@ def get_tags_api():
         raise Http404("Tag does not exist")
 
 def get_cats_api():
-    url = f'http://www.mkdjgo.site/api/v1/catlist'
+    url = f'http://127.0.0.1:8001/api/v1/catlist'
     response = requests.get(url)
 
     if response.status_code == 200:
@@ -66,7 +66,7 @@ def get_cats_api():
         raise Http404("Not Found")
 
 def get_husbands_api():
-    url = f'http://www.mkdjgo.site/api/v1/husbandslist'
+    url = f'http://127.0.0.1:8001/api/v1/husbandslist'
     response = requests.get(url)
 
     if response.status_code == 200:
@@ -77,7 +77,7 @@ def get_husbands_api():
 
 
 def get_womenpublished_api():
-    url = f'http://www.mkdjgo.site/api/v1/womenpublished'
+    url = f'http://127.0.0.1:8001/api/v1/womenpublished'
     response = requests.get(url)
 
     if response.status_code == 200:
@@ -88,7 +88,7 @@ def get_womenpublished_api():
 
 
 def get_user_model_api():
-    url = f'http://www.mkdjgo.site/api/v1/users'
+    url = f'http://127.0.0.1:8001/api/v1/users'
     response = requests.get(url)
 
     if response.status_code == 200:
